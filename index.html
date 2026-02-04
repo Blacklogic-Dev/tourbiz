@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TourBiz Zone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-800 via-purple-600 to-purple-400">
+
+  <div class="w-full max-w-md px-6 text-center">
+
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+      <img
+        src="tour.jpg"
+        alt="TourBiz Zone Logo"
+        class="w-[320px] h-[320px] object-contain rounded-3xl shadow-2xl bg-white/10 backdrop-blur-md p-4"
+        style="animation: breathe 4s ease-in-out infinite;"
+      />
+    </div>
+
+    <!-- Info -->
+    <div class="bg-purple-600/90 rounded-2xl p-6 text-white shadow-xl mb-6">
+      <p class="font-semibold text-sm">
+        Welcome to <span class="font-bold">TourBiz Zone</span> 🚀
+      </p>
+      <p class="text-sm mt-1">
+        Grades <strong>9–12</strong> 🎓 | Business 💼 | Tourism 🌍 | Math Lit ➗
+      </p>
+    </div>
+
+    <!-- Login Form -->
+    <div class="bg-white rounded-2xl p-6 shadow-xl text-purple-800">
+
+      <h2 class="text-lg font-bold mb-4">Student Login</h2>
+
+      <input
+        type="text"
+        id="studentId"
+        placeholder="Student ID (26xxxx)"
+        class="w-full p-3 rounded border mb-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
+      />
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Year of Birth"
+        class="w-full p-3 rounded border mb-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
+      />
+
+      <button
+        onclick="loginStudent()"
+        class="w-full bg-purple-700 text-white py-3 rounded-xl font-semibold hover:bg-purple-800 transition active:scale-95"
+      >
+        Login
+      </button>
+
+      <p id="loginMessage" class="mt-3 font-semibold"></p>
+
+    </div>
+
+  </div>
+
+  <!-- JS Logic -->
+  <script>
+    function loginStudent() {
+      const studentId = document.getElementById("studentId").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const msg = document.getElementById("loginMessage");
+
+      const idPattern = /^26\d{4}$/; // starts with 26, total 6 digits
+
+      if (!idPattern.test(studentId)) {
+        msg.textContent = "Login Unsuccessfully ❌⛔️";
+        msg.className = "mt-3 text-red-600 font-semibold";
+        return;
+      }
+
+      const year = parseInt(password);
+
+      if (isNaN(year) || year >= 2011) {
+        msg.textContent = "Login Unsuccessfully ❌⛔️";
+        msg.className = "mt-3 text-red-600 font-semibold";
+        return;
+      }
+
+      // SUCCESS
+      msg.textContent = "Login Successfully 👍✅";
+      msg.className = "mt-3 text-green-600 font-semibold";
+
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 1200);
+    }
+  </script>
+
+</body>
+</html>
